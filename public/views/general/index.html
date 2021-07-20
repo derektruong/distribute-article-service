@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+{{ define "general/index.html" }}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Cypher News power by derektruong</title>
+    <!-- MDB icon -->
+    <link
+      rel="icon"
+      href="../statics/image/mdb-favicon.ico"
+      type="image/x-icon"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="../../statics/css/mdb/mdb.min.css" />
+    <link rel="stylesheet" href="../../statics/css/style.css" />
+	<!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Start your project here-->
+    <div id="navigation"></div>
+
+    <div id="carouselExampleCaptions" class="carousel slide" data-mdb-ride="carousel">
+		<div class="carousel-indicators">
+		  <button
+			type="button"
+			data-mdb-target="#carouselExampleCaptions"
+			data-mdb-slide-to="0"
+			class="active"
+			aria-current="true"
+			aria-label="Slide 1"
+		  ></button>
+		  <button
+			type="button"
+			data-mdb-target="#carouselExampleCaptions"
+			data-mdb-slide-to="1"
+			aria-label="Slide 2"
+		  ></button>
+		  <button
+			type="button"
+			data-mdb-target="#carouselExampleCaptions"
+			data-mdb-slide-to="2"
+			aria-label="Slide 3"
+		  ></button>
+		</div>
+		<div class="carousel-inner" style="width: 100vw; height: 90vh;">
+		  <div class="carousel-item active">
+			<img
+			  src="https://images.pexels.com/photos/4057663/pexels-photo-4057663.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+			  class="d-block w-100" style="width:80vw; height: 90vh;" 
+			  alt="..."
+			/>
+			<div class="carousel-caption d-none d-md-block mb-5">
+			  <h5>Fresh your life</h5>
+			  <p>Bring top headlines and innumerate news to you <br>Enjoy your life
+			  </p>
+			</div>
+		  </div>
+		  <div class="carousel-item">
+			<img
+			  src="https://images.pexels.com/photos/1742370/pexels-photo-1742370.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+			  class="d-block w-100" style="width:100%; height: 90vh;"
+			  alt="..."
+			/>
+			<div class="carousel-caption d-none d-md-block mb-5">
+			  <h5>Explore the world of knowledge and experience</h5>
+			  <p>Searching and reading interesting blogs and articles from everyone.</p>
+			</div>
+		  </div>
+		  <div class="carousel-item">
+			<img
+			  src="https://images.pexels.com/photos/261579/pexels-photo-261579.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+			  class="d-block w-100" style="width:100%; height: 90vh;"
+			  alt="..."
+			/>
+			<div class="carousel-caption d-none d-md-block mb-5">
+			  <h5>Let your creativity fly away</h5>
+			  <p>Create articles from your experiences to share with the world.</p>
+			</div>
+		  </div>
+		</div>
+		<button
+		  class="carousel-control-prev"
+		  type="button"
+		  data-mdb-target="#carouselExampleCaptions"
+		  data-mdb-slide="prev"
+		>
+		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Previous</span>
+		</button>
+		<button
+		  class="carousel-control-next"
+		  type="button"
+		  data-mdb-target="#carouselExampleCaptions"
+		  data-mdb-slide="next"
+		>
+		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Next</span>
+		</button>
+	  </div>
+
+
+	  <!--Main layout-->
+	  <main class="mt-5">
+		<div class="container">
+		  <!--Section: Content-->
+		  <section>
+			<div class="row">
+			  <div class="col-md-6 gx-5 mb-4">
+				<div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
+				  <img src="https://images.pexels.com/photos/904616/pexels-photo-904616.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="img-fluid" />
+				  <a href="#!">
+					<div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+				  </a>
+				</div>
+			  </div>
+  
+			  <div class="col-md-6 gx-5 mb-4">
+				<h4><strong>Every day a quote</strong></h4>
+				{{ range.Quo1 }}
+					<p class="text-muted">
+						{{ .Text }}
+					</p>
+					<p><strong><i>{{ .Author }}</i></strong></p>
+
+				{{ end }}
+			  </div>
+			</div>
+		  </section>
+		  <!--Section: Content-->
+  
+		  <hr class="my-5" />
+  
+		  <!--Section: Content-->
+		  <section class="text-center">
+			<h4 class="mb-5"><strong>From my pleasure!</strong></h4>
+  
+			<div class="row">
+			  <div class="col-lg-4 col-md-6 mb-4">
+				<div class="card">
+				  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+					<img
+					  src="https://images.pexels.com/photos/2776479/pexels-photo-2776479.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+					  class="img-fluid"
+					/>
+					<a href="#!">
+					  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+					</a>
+				  </div>
+				  <div class="card-body">
+					<h5 class="card-title">{{ .AuthorCard1 }}</h5>
+					<p class="card-text">
+						{{ .TextCard1 }}
+					</p>
+				  </div>
+				</div>
+			  </div>
+  
+			  <div class="col-lg-4 col-md-6 mb-4">
+				<div class="card">
+				  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+					<img
+					  src="https://mdbootstrap.com/img/new/standard/nature/023.jpg"
+					  class="img-fluid"
+					/>
+					<a href="#!">
+					  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+					</a>
+				  </div>
+				  <div class="card-body">
+					<h5 class="card-title">{{ .AuthorCard2 }}</h5>
+					<p class="card-text">
+						{{ .TextCard2 }}
+					</p>
+				  </div>
+				</div>
+			  </div>
+  
+			  <div class="col-lg-4 col-md-6 mb-4">
+				<div class="card">
+				  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+					<img
+					  src="https://images.pexels.com/photos/668353/pexels-photo-668353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+					  class="img-fluid"
+					/>
+					<a href="#!">
+					  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+					</a>
+				  </div>
+				  <div class="card-body">
+					<h5 class="card-title">{{ .AuthorCard3 }}</h5>
+					<p class="card-text">
+						{{ .TextCard3 }}
+					</p>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </section>
+		  <!--Section: Content-->
+  
+		  <hr class="my-5" />
+		
+		  <!--Section: Content-->
+		</div>
+	  </main>
+	  <!--Main layout-->
+
+
+	  <!--Footer-->
+	  <footer class="bg-light text-lg-start">
+  
+		<div class="text-center py-4 align-items-center">
+		  <p>Contact me via social networks</p>
+		  <a
+			href="https://www.linkedin.com/in/derektruongdev/"
+			class="btn btn-primary m-1"
+			role="button"
+			rel="nofollow"
+			target="_blank"
+		  >
+			<i class="fab fa-linkedin"></i>
+		  </a>
+		  <a
+			href="https://www.facebook.com/DerekTruong6301/"
+			class="btn btn-primary m-1"
+			role="button"
+			rel="nofollow"
+			target="_blank"
+		  >
+			<i class="fab fa-facebook-f"></i>
+		  </a>
+		  <a
+			href="https://github.com/derektruong"
+			class="btn btn-primary m-1"
+			role="button"
+			rel="nofollow"
+			target="_blank"
+		  >
+			<i class="fab fa-github"></i>
+		  </a>
+		</div>
+  
+		<!-- Copyright -->
+		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+		  © 2021 Copyright:
+		  <a class="text-dark" href="http://truongminhduc.site" target="_blank">Derek Truong</a>
+		</div>
+		<!-- Copyright -->
+	  </footer>
+	  <!--Footer-->
+
+    <!-- End your project here-->
+
+    <!-- MDB -->
+    <script type="text/javascript" src="../../statics/js/mdb/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="../../statics/js/general/navbar.js"></script>
+  </body>
+</html>
+{{ end }}

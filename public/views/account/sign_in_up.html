@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{{ define "account/sign_in_up.html" }}
 <html lang="en">
 
 <head>
@@ -8,18 +7,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login</title>
 	<!-- MDB icon -->
-	<link rel="icon" href="../statics/image/mdb-favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="static/image/mdb-favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="../statics/css/account/sign_in_up.css">
+	<link rel="stylesheet" href="/static/css/account/sign_in_up.css">
 </head>
 
 <body>
-	<h2>Sign in/up Form</h2>
 	<div class="container" id="container">
 		<!-- two forms sign in and sign up -->
 		<div class="form-container sign-up-container">
-			<div class="form" method="POST">
+			<form onsubmit="return(false)">
 				<h1>Create Account</h1>
 				<div class="social-container">
 					<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -27,22 +25,21 @@
 					<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 				</div>
 				<span>or use your email for registration</span>
-				<input type="text" placeholder="Name" name="name" required />
+				<input id="nameSignUp" type="text" placeholder="Name" name="name" required />
 
-				<input id="emailSignUp" onchange="helpEmailSignUp()" type="email" placeholder="Email" name="email"
+				<input id="emailSignUp" type="email" placeholder="Email" name="email"
 					required />
 				<div id="emailExist" class="text-left fs-6"></div>
 
-				<input type="password" placeholder="Password" name="password" required />
+				<input id="passwordSignUp" type="password" placeholder="Password" name="password" required />
 
-				<a href="/signup">
-					<button id="btnSignUpSubmit">Sign Up</button>
-				</a>
-			</div>
+				<button type="submit" id="btnSignUpSubmit" onclick="btnSignUpClick()">Sign Up</button>
+			
+			</form>
 		</div>
 
 		<div class="form-container sign-in-container">
-			<div class="form" id="sign-in-form">
+			<form >
 				<h1>Sign in</h1>
 				<div class="social-container">
 					<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -60,8 +57,8 @@
 				<div id="wrongPass" class="text-sm-left"></div>
 
 				<a href="#">Forgot your password?</a>
-				<button id="btnSignInSubmit">Sign In</button>
-			</div>
+				<button type="submit"id="btnSignInSubmit">Sign In</button>
+			</form>
 		</div>
 		<!-- end -->
 		<!-- overlay container -->
@@ -70,19 +67,19 @@
 				<div class="overlay-panel overlay-left">
 					<h1>Welcome Back!</h1>
 					<p>To keep connected with us please login with your personal info</p>
-					<a href="/signin"><button class="ghost" id="signIn">Sign In</button></a>
+					<button class="ghost" id="signIn">Sign In</button>
 				</div>
 				<div class="overlay-panel overlay-right">
 					<h1>Hello, Friend!</h1>
 					<p>Enter your personal details and start journey with us</p>
-					<a href="/signup"></a><button class="ghost" id="signUp">Sign Up</button></a>
+					<button class="ghost" id="signUp">Sign Up</button>
 				</div>
 			</div>
 		</div>
 
 	</div>
-	<!-- <script type="text/javascript" src="../statics/data.json"></script> -->
-	<script rel="javascript" type="text/javascript" src="../statics/js/account/sign_in_up.js"></script>
+	<!-- <script type="text/javascript" src="static/data.json"></script> -->
+	<script rel="javascript" type="text/javascript" src="static/js/account/sign_in_up.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -105,4 +102,3 @@
 </body>
 
 </html>
-{{ end }}

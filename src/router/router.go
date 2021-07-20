@@ -1,7 +1,10 @@
 package router
 
 import (
+	"net/http"
+
 	"github.com/derektruong/distribute-article-service/src/handler"
+	"github.com/derektruong/distribute-article-service/src/handler/account"
 	"github.com/derektruong/distribute-article-service/src/middleware"
 
 	"github.com/gofiber/fiber/v2"
@@ -9,22 +12,34 @@ import (
 )
 
 // SetupRoutes setup router api
-func SetupRoutes(app *fiber.App) {
+func SetupRoutes(app *fiber.App, cl *http.Client) {
+	// Index page
+	app.Get("/", handler.QuotesHandler(cl))
+
+	// Render sign in page and welcome
+	acc := app.Group("/account")
+	acc.Get("/", account.RenderSignInHandler)
+	acc.Get("/welcome", account.RenderWelcomeHandler)
+
 	// Middleware
 	api := app.Group("/api", logger.New())
 	api.Get("/", handler.Hello)
+	api.Get("/checkloggedin", handler.IsLoggedIn)
+
+	// Sign up - sign in API
+	api.Post("/signup", account.SignUpHandler)
 
 	// Auth
 	auth := api.Group("/auth")
 	auth.Post("/login", handler.Login)
 
-	// User
-	user := api.Group("/account")
+	// Account
+	account := api.Group("/account")
 
-	user.Get("/:id", handler.GetAccount)
-	user.Post("/", handler.CreateAccount)
-	user.Patch("/:id", middleware.Protected(), handler.UpdateAccount)
-	user.Delete("/:id", middleware.Protected(), handler.DeleteAccount)
+	account.Get("/:id", handler.GetAccount)
+	account.Post("/", handler.CreateAccount)
+	account.Patch("/:id", middleware.Protected(), handler.UpdateAccount)
+	account.Delete("/:id", middleware.Protected(), handler.DeleteAccount)
 
 	// Post
 	product := api.Group("/product")

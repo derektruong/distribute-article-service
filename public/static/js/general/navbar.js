@@ -1,28 +1,6 @@
-let userArea = `<a href="/signin">
-<button class="btn btn-primary me-3">
-	Sign in
-</button>
-</a>`
 
-function getCookie(cname) {
-	let name = cname + "=";
-	let decodedCookie = decodeURIComponent(document.cookie);
-	let ca = decodedCookie.split(';');
-	for (let i = 0; i < ca.length; i++) {
-		let c = ca[i];
-		while (c.charAt(0) == ' ') {
-			c = c.substring(1);
-		}
-		if (c.indexOf(name) == 0) {
-			return c.substring(name.length, c.length);
-		}
-	}
-	return "";
-}
-
-window.addEventListener('load', () => {
-
-	fetch('/api/authuser', {
+async () => {
+	await fetch('/api/checkloggedin', {
 		method: 'GET',
 	}).then(function (response) {
 		return response.json();
@@ -30,40 +8,40 @@ window.addEventListener('load', () => {
 		.then(function (data) {
 			// console.log(data);
 			(function () {
-				if (data.message === "granted!") {
+				if (data.status === "logged in") {
 					console.log("ok")
-					userArea = `
-					<ul class="navbar-nav">
-						<!-- Avatar -->
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
-								id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
-								aria-expanded="false">
-								<img src="https://image.flaticon.com/icons/png/512/4825/4825123.png"
-									class="rounded-circle" height="22" alt="" loading="lazy" />
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<li>
-									<a class="dropdown-item" href="#">My profile</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="#">Settings</a>
-								</li>
-								<li>
-									<a class="dropdown-item " id="btnLogout" onclick="clickLogout()" href="#">Logout</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					<!-- end avatar -->
-					`
+					document.getElementById("userArea").innerHTML = `
+				<ul class="navbar-nav">
+					<!-- Avatar -->
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+							id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
+							aria-expanded="false">
+							<img src="https://image.flaticon.com/icons/png/512/4825/4825123.png"
+								class="rounded-circle" height="22" alt="" loading="lazy" />
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<li>
+								<a class="dropdown-item" href="#">My profile</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Settings</a>
+							</li>
+							<li>
+								<a class="dropdown-item " id="btnLogout" onclick="clickLogout()" href="#">Logout</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- end avatar -->
+				`
 
-					let yourArea = `
-					<div class="navbar-nav">
-						<a class="nav-link active text-light fs-5 me-2" aria-current="page"
-							href="#">Your Area</a>
-					</div>
-					`
+					document.getElementById("yourArea").innerHTML = `
+				<div class="navbar-nav">
+					<a class="nav-link active text-light fs-5 me-2" aria-current="page"
+						href="#">Your Area</a>
+				</div>
+				`
 					setNavbar(userArea, yourArea)
 				} else {
 					setNavbar(userArea, "")
@@ -74,11 +52,12 @@ window.addEventListener('load', () => {
 		.catch(function (err) {
 			console.log('error: ' + err);
 		});
-});
+}
 
-function setNavbar(userArea, yourArea) {
+
+window.addEventListener("load", () => {
 	document.getElementById("navigation").innerHTML =
-		`<!-- Navbar -->
+        `<!-- Navbar -->
 	<nav class="shadow-lg navbar navbar-expand-lg navbar-dark fixed-top">
 		<!-- Container wrapper -->
 		<div class="container">
@@ -139,11 +118,9 @@ function setNavbar(userArea, yourArea) {
 							href="#">Explore</a>
 					</div>
 
-					`
-		+
-		yourArea
-		+
-		`
+					` +
+        `<div id="yourArea"> </div>` +
+        `
 
 					<ul class="navbar-nav">
 						<!-- Dropdown -->
@@ -175,12 +152,18 @@ function setNavbar(userArea, yourArea) {
 
 				<div class="d-flex align-items-center">
 
-					`
+		` 
 		+
-		userArea
+		`<div id="userArea">
+			<a href="/account">
+				<button class="btn btn-primary me-3">
+					Sign in
+				</button>
+			</a> 
+		</div>`
+		
 		+
-		`
-					
+        `	
 				</div>
 			</div>
 			<!-- Collapsible wrapper -->
@@ -191,21 +174,21 @@ function setNavbar(userArea, yourArea) {
 	if (document.getElementById("search-box").value === "{{ .Query }}") {
 		document.getElementById("search-box").value = "";
 	}
-}
+})
 
 function clickLogout() {
 	fetch('/api/authlogout', {
-		method: 'GET', 
-	  }).then(function (response) {
-			return response.json();
-		})
+		method: 'GET',
+	}).then(function (response) {
+		return response.json();
+	})
 		.then(function (data) {
 			console.log(data);
-			(function() {
-				if(data.message === "logout successfully") {
+			(function () {
+				if (data.message === "logout successfully") {
 					window.location.href = "/";
 				}
-				
+
 			})();
 		})
 		.catch(function (err) {

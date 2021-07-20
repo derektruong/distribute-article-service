@@ -1,30 +1,43 @@
 package main
 
 import (
+	"log"
+	"net/http"
+	"time"
+
 	"github.com/derektruong/distribute-article-service/src/database"
 	"github.com/derektruong/distribute-article-service/src/router"
-	"log"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/template/html"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/template/html"
 	_ "gorm.io/driver/mysql"
 )
 
 func main() {
-	engine := html.New("./public/views", ".html")
+	// Init client connection
+	myClient := &http.Client{Timeout: 10 * time.Second}
 
+	// Init routers with fiber
+	engine := html.New("./public/views", ".html")
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
 
+	// Serve static files
 	app.Static("/", "./public")
 	
 	app.Use(cors.New())
 
+	// Connect to database
 	database.ConnectDB()
 
-	router.SetupRoutes(app)
+	router.SetupRoutes(app, myClient)
+	
+	// handle custom 404 responses
+	app.Use(func(c *fiber.Ctx) error {
+		return c.Status(fiber.StatusNotFound).Render("general/notfound", nil)
+	})
 	log.Fatal(app.Listen(":3000"))
 
 	defer func ()  {

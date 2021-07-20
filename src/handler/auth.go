@@ -32,18 +32,6 @@ func getUserByEmail(e string) (*model.Account, error) {
 	return &user, nil
 }
 
-// func getUserByUsername(u string) (*model.Account, error) {
-// 	db := database.DB
-// 	var user model.Account
-// 	if err := db.Where(&model.Account{Username: u}).Find(&user).Error; err != nil {
-// 		if errors.Is(err, gorm.ErrRecordNotFound) {
-// 			return nil, nil
-// 		}
-// 		return nil, err
-// 	}
-// 	return &user, nil
-// }
-
 // Login get user and password
 func Login(c *fiber.Ctx) error {
 	type LoginInput struct {
@@ -103,4 +91,10 @@ func Login(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(fiber.Map{"status": "success", "message": "Success login", "data": t})
+}
+
+func IsLoggedIn(c *fiber.Ctx) error{
+	return c.JSON(fiber.Map{
+		"status": "logged in",
+	})
 }

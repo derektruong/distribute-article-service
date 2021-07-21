@@ -13,14 +13,29 @@ signInButton.addEventListener('click', () => {
 	container.classList.remove("right-panel-active");
 });
 
-async function btnSignUpClick() { 
+function btnSignUpClick() { 
+	let isValidForm = true;
+	if(document.getElementById("nameSignUp").checkValidity() == false) {
+		isValidForm = false
+	}
+	if(document.getElementById("emailSignUp").checkValidity() == false) {
+		isValidForm = false
+	}
+	if(document.getElementById("passwordSignUp").checkValidity() == false) {
+		isValidForm = false
+	}
+
+	if(isValidForm === false) {
+		console.log("error invalid")
+		return;
+	}
 	const formData = new FormData();
 
 	formData.append('name', document.getElementById("nameSignUp").value);
     formData.append("email", document.getElementById("emailSignUp").value);
     formData.append("password", document.getElementById("passwordSignUp").value);
 
-	await fetch('/api/signup', {
+	fetch('/api/signup', {
 		method: 'POST',
 		body: formData,
 	})
@@ -46,82 +61,56 @@ async function btnSignUpClick() {
 			})();
 		})
 }
-// document.getElementById("btnSignUpSubmit").addEventListener('click', () => {
-	
-// })
 
-function helpEmailSignUp() {
-	fetch('../statics/data.json')
+
+function btnSignInClick() { 
+	let isValidForm = true;
+	if(document.getElementById("emailSignIn").checkValidity() == false) {
+		isValidForm = false
+	}
+	if(document.getElementById("passwordSignIn").checkValidity() == false) {
+		isValidForm = false
+	}
+
+	if(!isValidForm) {
+		console.log("error invalid")
+		return;
+	}
+	const formData = new FormData();
+
+    formData.append("email", document.getElementById("emailSignIn").value);
+    formData.append("password", document.getElementById("passwordSignIn").value);
+
+	fetch('/api/auth/signin', {
+		method: 'POST',
+		body: formData,
+	})
 		.then(function (response) {
 			return response.json();
 		})
 		.then(function (data) {
-			(function() {
-				let flag = false
-				for (var i = 0; i < data.length; i++) {
-					if(emailSignUpInput.value === data[i].email) {
-						document.getElementById("emailExist").innerHTML 
-							= "<p class='text-warning m-0'>This email is already registered!</p>";
-
-						document.getElementById("btnSignUpSubmit").disabled = true;
-						flag = true;
+			console.log(data);
+			(function () {
+				if(data.status === 'error') {
+					if(data.message === 'Account not found') {
+						document.getElementById("notExistEmail").innerHTML 
+							= 	`<p class='text-warning m-0' style='font-size: 12px'>
+									This email is not signed up yet, let sign up!
+								</p>`;
+						return;
+					} else if (data.message === "Invalid password") {
+						document.getElementById("wrongPass").innerHTML 
+							= 	`<p class='text-warning m-0' style='font-size: 12px'>
+									password was wrong, try again!
+								</p>`;
+						return;
+					} else {
+						console.log(data.message);
 					}
-					if(flag) break;
-					else {
-						document.getElementById("emailExist").innerHTML 
-							= "";
-						document.getElementById("btnSignUpSubmit").disabled = false;
-					}
+				} else if (data.status === 'success') {
+					window.location.href = "/"
 				}
+
 			})();
 		})
-		.catch(function (err) {
-			console.log('error: ' + err);
-		});
-
-	
 }
-
-btnSignInSubmit.addEventListener("click", () => {
-    const formData = new FormData();
-
-    formData.append("email", document.getElementById("emailSignIn").value);
-    formData.append(
-        "password",
-        document.getElementById("passwordSignIn").value
-    );
-	formData.append('is_login', 'true');
-
-    fetch("/signin", {
-        method: "POST",
-        body: formData,
-    })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-            (function () {
-
-				if(data.message === "Email wrong") {
-					document.getElementById("notExistEmail").innerHTML 
-							= "<p class='text-warning m-0'>"+ data.text +"</p>";
-					document.getElementById("wrongPass").innerHTML 
-							= "";
-					return
-				} else if(data.message === "Pass wrong") {
-					document.getElementById("wrongPass").innerHTML 
-							= "<p class='text-warning m-0'>"+ data.text +"</p>";
-					document.getElementById("notExistEmail").innerHTML 
-							= "";
-					return
-
-				} else if (data.message === "Set cookie successfully") {
-                    window.location.href = "/";
-                }
-            })();
-        })
-        .catch(function (err) {
-            console.log("error: " + err);
-        });
-});

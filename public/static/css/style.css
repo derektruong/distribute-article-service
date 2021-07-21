@@ -21,7 +21,8 @@ body {
 }
 
 .navbar-dark {
-	background:#161925;
+	/* background:#161925; */
+	background: -webkit-linear-gradient(180deg, hsla(205, 46%, 10%, 1) 0%, hsla(191, 28%, 23%, 1) 50%, hsla(207, 41%, 27%, 1) 100%);
 }
 
 .section {

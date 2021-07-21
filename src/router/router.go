@@ -24,22 +24,24 @@ func SetupRoutes(app *fiber.App, cl *http.Client) {
 	// Middleware
 	api := app.Group("/api", logger.New())
 	api.Get("/", handler.Hello)
-	api.Get("/checkloggedin", handler.IsLoggedIn)
 
 	// Sign up - sign in API
 	api.Post("/signup", account.SignUpHandler)
 
 	// Auth
 	auth := api.Group("/auth")
-	auth.Post("/login", handler.Login)
+	auth.Post("/signin", account.Login)
+	auth.Post("/isloggedin", middleware.Protected(), account.IsLoggedIn)
+	auth.Get("/logout", account.Logout)
+	auth.Get("/gettoken", account.GetJWTToken)
 
 	// Account
-	account := api.Group("/account")
+	authAcc := api.Group("/account")
 
-	account.Get("/:id", handler.GetAccount)
-	account.Post("/", handler.CreateAccount)
-	account.Patch("/:id", middleware.Protected(), handler.UpdateAccount)
-	account.Delete("/:id", middleware.Protected(), handler.DeleteAccount)
+	authAcc.Get("/:id", account.GetAccount)
+	authAcc.Post("/", account.CreateAccount)
+	authAcc.Patch("/:id", middleware.Protected(), account.UpdateAccount)
+	authAcc.Delete("/:id", middleware.Protected(), account.DeleteAccount)
 
 	// Post
 	product := api.Group("/product")

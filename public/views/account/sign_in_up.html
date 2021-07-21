@@ -33,13 +33,15 @@
 
 				<input id="passwordSignUp" type="password" placeholder="Password" name="password" required />
 
-				<button type="submit" id="btnSignUpSubmit" onclick="btnSignUpClick()">Sign Up</button>
+				<button type="submit" id="btnSignUpSubmit" onclick="btnSignUpClick()" style="background-color: #FF4B2B;">
+					Sign Up
+				</button>
 			
 			</form>
 		</div>
 
 		<div class="form-container sign-in-container">
-			<form >
+			<form onsubmit="return(false)">
 				<h1>Sign in</h1>
 				<div class="social-container">
 					<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -48,16 +50,16 @@
 				</div>
 				<span>or use your account</span>
 
-				<input id="emailSignIn" type="email" placeholder="Email" value="{{ .Email }}" required
-					 />
+				<input id="emailSignIn" type="email" placeholder="Email"required />
 				<div id="notExistEmail" class="text-sm-left"></div>
 
-				<input id="passwordSignIn" type="password" placeholder="Password" value="{{ .Password }}" required
-					/>
+				<input id="passwordSignIn" type="password" placeholder="Password" required/>
 				<div id="wrongPass" class="text-sm-left"></div>
 
 				<a href="#">Forgot your password?</a>
-				<button type="submit"id="btnSignInSubmit">Sign In</button>
+				<button type="submit"id="btnSignInSubmit" onclick="btnSignInClick()" style="background-color: #FF4B2B;">
+					Sign In
+				</button>
 			</form>
 		</div>
 		<!-- end -->

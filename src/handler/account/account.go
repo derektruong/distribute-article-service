@@ -1,11 +1,11 @@
-package handler
+package account
 
 import (
 	"github.com/derektruong/distribute-article-service/src/database"
 	"github.com/derektruong/distribute-article-service/src/model"
 	"strconv"
 
-	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt"
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
 )

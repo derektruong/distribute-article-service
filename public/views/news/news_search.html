@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<title>Cypher News power by derektruong</title>
+	<!-- MDB icon -->
+	<link rel="icon" href="/assets/image/mdb-favicon.ico" type="image/x-icon" />
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+	<!-- Google Fonts Roboto -->
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+	<!-- MDB -->
+	<link rel="stylesheet" href="/static/css/mdb/mdb.min.css" />
+	<link rel="stylesheet" href="/static/css/style.css" />
+	<!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<!-- Start your project here-->
+	<div id="navigation"></div>
+	<script>
+		$.get("../../../views/general/navbar.html", function (data) {
+			$("#navigation").replaceWith(data);
+		});
+		if (document.getElementById("search-box").value === "{{ .Query }}") {
+			document.getElementById("search-box").value = "";
+		}
+	</script>
+
+	<section class="section">
+		<div class="result-count">
+			{{ if .Results}} {{ if (gt .Results.TotalResults 0) }}
+			<p>
+				About <strong>{{ .Results.TotalResults }}</strong> results
+				were found with your key <strong>{{ .Query }}</strong>
+			</p>
+			{{ else if and (ne .Query "") (eq .Results.TotalResults 0)}}
+			<p>
+				No results found for your query:
+				<strong>{{ .Query }}</strong>
+			</p>
+			{{ end }} {{ end }}
+		</div>
+		<!--  TODO: Up here! -->
+
+		<!-- Change here! -->
+
+		<div class="container">
+			{{ range $i1, $v1 := .RowResults }}
+			<div class="row">
+
+				{{ range $i2, $v2 := $v1 }}
+				<div class="col-md">
+					<div class="card">
+						<div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+							<img src="{{ $v2.URLToImage }}" alt="N/A"class="img-fluid" />
+							<a href="{{ $v2.URL }}" target="_blank">
+								<div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+							</a>
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">{{ $v2.Title }}</h5>
+							<p class="card-text">
+								{{ $v2.FormatDescription }}
+							</p>
+							<div class="card-footer text-muted">{{ $v2.Source.Name}} {{ $v2.FormatPublishedDate }}</div>
+						</div>
+					</div>
+				</div>
+				{{ end }}
+
+			</div>
+			{{ end }}
+
+		</div>
+
+		<!-- //// -->
+		
+		<div class="pagination">
+			<div id="previous-page">
+				{{ if (ne .CurrentPage .IsFirstPage) }}
+				<a href="/search?q={{ .Query }}&page={{ .IsFirstPage }}">
+					Previous
+				</a>
+				{{ end }}
+			</div>
+			<div class="current-page">
+				<a> {{ .CurrentPage }} </a>
+			</div>
+
+			<div id="next-page">
+				<!-- {{ if . }} -->
+				{{ if (ne .CurrentPage .IsLastPage ) }}
+				<a href="/search?q={{ .Query }}&page={{ .IsLastPage }}">
+					Next
+				</a>
+				{{ end }}
+				<!-- {{ end }} -->
+			</div>
+		</div>
+	</section>
+
+	<!-- End your project here-->
+
+	<!-- MDB -->
+	<script type="text/javascript" src="/static/js/mdb/mdb.min.js"></script>
+	<!-- Custom scripts -->
+	<script type="text/javascript" src="/static/js/general/navbar.js"></script>
+</body>
+
+</html>

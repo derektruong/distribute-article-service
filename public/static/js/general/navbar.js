@@ -1,5 +1,4 @@
 
-
 function getToken() {
 
 	return fetch('/api/auth/gettoken', {
@@ -15,17 +14,6 @@ function getToken() {
 	});
 }
 window.addEventListener("load", () => {
-
-	$.get("../../../views/general/navbar.html", function (data) {
-		$("#navigation").replaceWith(data);
-	});
-	
-	setTimeout(function () {
-		if (document.getElementById("search-box").value === "{{ .Query }}") {
-			document.getElementById("search-box").value = "";
-		}
-	}, 1000);
-
 
 	// Set navbar for account if logged in
 	setTimeout(function () {
@@ -140,7 +128,7 @@ window.addEventListener("load", () => {
 		}).catch(function (err) {
 				console.log('error: ' + err);
 			});
-	}, 1000);
+	}, 500);
 })
 
 function clickLogout() {

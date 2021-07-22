@@ -33,6 +33,7 @@ func main() {
 	database.ConnectDB()
 
 	router.SetupRoutes(app, myClient)
+	router.SetupNewsRoutes(app, myClient)
 	
 	// handle custom 404 responses
 	app.Use(func(c *fiber.Ctx) error {

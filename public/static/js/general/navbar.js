@@ -14,7 +14,9 @@ function getToken() {
 	});
 }
 window.addEventListener("load", () => {
-
+	setTimeout(function () {
+		document.getElementById("search-box").value = "";
+	}, 1000);
 	// Set navbar for account if logged in
 	setTimeout(function () {
 		getToken().then(dataResponse => {

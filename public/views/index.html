@@ -34,6 +34,11 @@
   <body>
     <!-- Start your project here-->
     <div id="navigation"></div>
+	<script>
+		$.get("../../../views/general/navbar.html", function (data) {
+			$("#navigation").replaceWith(data);
+		});
+	</script>
 
     <div id="carouselExampleCaptions" class="carousel slide" data-mdb-ride="carousel">
 		<div class="carousel-indicators">

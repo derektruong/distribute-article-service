@@ -1,0 +1,15 @@
+h1 {
+	text-align: center;
+}
+body {
+	background: #F1F2EB;
+	height: 100vh;
+	padding: 3em;
+	font-family: 'Montserrat';
+}
+
+#editorjs {
+	background: white;
+	padding: 1.5em;
+	border-radius: 4px;
+}

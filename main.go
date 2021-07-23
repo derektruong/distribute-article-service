@@ -12,6 +12,9 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/template/html"
 	_ "gorm.io/driver/mysql"
+
+	// testing package
+	"github.com/derektruong/distribute-article-service/testing/testing_router"
 )
 
 func main() {
@@ -26,7 +29,7 @@ func main() {
 
 	// Serve static files
 	app.Static("/", "./public")
-	
+
 	app.Use(cors.New())
 
 	// Connect to database
@@ -34,14 +37,15 @@ func main() {
 
 	router.SetupRoutes(app, myClient)
 	router.SetupNewsRoutes(app, myClient)
-	
+	testing_router.SetupTestingRoutes(app)
+
 	// handle custom 404 responses
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusNotFound).Render("general/notfound", nil)
 	})
 	log.Fatal(app.Listen(":3000"))
 
-	defer func ()  {
+	defer func() {
 		sqlDB, err := database.DB.DB()
 		if err != nil {
 			log.Fatal(err)

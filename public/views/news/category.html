@@ -28,9 +28,6 @@
 		$.get("../../../views/general/navbar.html", function (data) {
 			$("#navigation").replaceWith(data);
 		});
-		if (document.getElementById("search-box").value === "{{ .Query }}") {
-			document.getElementById("search-box").value = "";
-		}
 	</script>
 
 	<section class="section">

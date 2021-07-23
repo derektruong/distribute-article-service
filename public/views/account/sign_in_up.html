@@ -1,106 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login</title>
+        <!-- MDB icon -->
+        <link
+            rel="icon"
+            href="/static/image/mdb-favicon.ico"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="/static/css/account/sign_in_up.css" />
+		<!-- <link rel="stylesheet" href="/static/css/main.scss" /> -->
+    </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login</title>
-	<!-- MDB icon -->
-	<link rel="icon" href="static/image/mdb-favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="/static/css/account/sign_in_up.css">
-</head>
-
-<body>
-	<div class="container" id="container">
-		<!-- two forms sign in and sign up -->
-		<div class="form-container sign-up-container">
-			<form onsubmit="return(false)">
-				<h1>Create Account</h1>
-				<div class="social-container">
-					<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-					<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-					<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-				</div>
-				<span>or use your email for registration</span>
-				<input id="nameSignUp" type="text" placeholder="Name" name="name" required />
-
-				<input id="emailSignUp" type="email" placeholder="Email" name="email"
-					required />
-				<div id="emailExist" class="text-left fs-6"></div>
-
-				<input id="passwordSignUp" type="password" placeholder="Password" name="password" required />
-
-				<button type="submit" id="btnSignUpSubmit" onclick="btnSignUpClick()" style="background-color: #FF4B2B;">
-					Sign Up
+    <body>
+		<!-- <div class="text-center"> -->
+			<a class="text-center" href="/">
+				<button type="button" class="btn btn-light btn-rounded ms-5 position-absolute bottom-50 start-50">
+					Back to home
 				</button>
+			</a>
 			
-			</form>
-		</div>
+		<!-- </div> -->
 
-		<div class="form-container sign-in-container">
-			<form onsubmit="return(false)">
-				<h1>Sign in</h1>
-				<div class="social-container">
-					<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-					<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-					<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-				</div>
-				<span>or use your account</span>
+        <div class="main">
+            <div class="container" id="container">
+                <!-- two forms sign in and sign up -->
+                <div class="form-container sign-up-container">
+                    <form onsubmit="return(false)">
+                        <h1>Create Account</h1>
+                        <div class="social-container">
+                            <a href="#" class="social"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="social"
+		                        ><i class="fab fa-google-plus-g"></i
+                            ></a>
+                            <a href="#" class="social"
+                                ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                        </div>
+                        <span>or use your email for registration</span>
+                        <input
+                            id="nameSignUp"
+                            type="text"
+                            placeholder="Name"
+                            name="name"
+                            required
+                        />
 
-				<input id="emailSignIn" type="email" placeholder="Email"required />
-				<div id="notExistEmail" class="text-sm-left"></div>
+                        <input
+                            id="emailSignUp"
+                            type="email"
+                            placeholder="Email"
+                            name="email"
+                            required
+                        />
+                        <div id="emailExist" class="text-left fs-6"></div>
 
-				<input id="passwordSignIn" type="password" placeholder="Password" required/>
-				<div id="wrongPass" class="text-sm-left"></div>
+                        <input
+                            id="passwordSignUp"
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            required
+                        />
 
-				<a href="#">Forgot your password?</a>
-				<button type="submit"id="btnSignInSubmit" onclick="btnSignInClick()" style="background-color: #FF4B2B;">
-					Sign In
-				</button>
-			</form>
-		</div>
-		<!-- end -->
-		<!-- overlay container -->
-		<div class="overlay-container">
-			<div class="overlay">
-				<div class="overlay-panel overlay-left">
-					<h1>Welcome Back!</h1>
-					<p>To keep connected with us please login with your personal info</p>
-					<button class="ghost" id="signIn">Sign In</button>
-				</div>
-				<div class="overlay-panel overlay-right">
-					<h1>Hello, Friend!</h1>
-					<p>Enter your personal details and start journey with us</p>
-					<button class="ghost" id="signUp">Sign Up</button>
-				</div>
-			</div>
-		</div>
+                        <button
+                            type="submit"
+                            id="btnSignUpSubmit"
+                            onclick="btnSignUpClick()"
+                            style="background-color: #ff4b2b"
+                        >
+                            Sign Up
+                        </button>
+                    </form>
+                </div>
 
-	</div>
-	<!-- <script type="text/javascript" src="static/data.json"></script> -->
-	<script rel="javascript" type="text/javascript" src="static/js/account/sign_in_up.js"></script>
+                <div class="form-container sign-in-container">
+                    <form onsubmit="return(false)">
+                        <h1>Sign in</h1>
+                        <div class="social-container">
+                            <a href="#" class="social"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="social"
+                                ><i class="fab fa-google-plus-g"></i
+                            ></a>
+                            <a href="#" class="social"
+                                ><i class="fab fa-linkedin-in"></i
+                            ></a>
+                        </div>
+                        <span>or use your account</span>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
+                        <input
+                            id="emailSignIn"
+                            type="email"
+                            placeholder="Email"
+                            required
+                        />
+                        <div id="notExistEmail" class="text-sm-left"></div>
 
+                        <input
+                            id="passwordSignIn"
+                            type="password"
+                            placeholder="Password"
+                            required
+                        />
+                        <div id="wrongPass" class="text-sm-left"></div>
 
-	{{ if .Show}}
-	<script type="text/javascript">
-		container.classList.add("right-panel-active");
-	</script>
+                        <a href="#">Forgot your password?</a>
+                        <button
+                            type="submit"
+                            id="btnSignInSubmit"
+                            onclick="btnSignInClick()"
+                            style="background-color: #ff4b2b"
+                        >
+                            Sign In
+                        </button>
+                    </form>
+                </div>
+                <!-- end -->
+                <!-- overlay container -->
+                <div class="overlay-container">
+                    <div class="overlay">
+                        <div class="overlay-panel overlay-left">
+                            <h1>Welcome Back!</h1>
+                            <p>
+                                To keep connected with us please login with your
+                                personal info
+                            </p>
+                            <button class="ghost" id="signIn">Sign In</button>
+                        </div>
+                        <div class="overlay-panel overlay-right">
+                            <h1>Hello, Friend!</h1>
+                            <p>
+                                Enter your personal details and start journey
+                                with us
+                            </p>
+                            <button class="ghost" id="signUp">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	{{ end }}
+        <!-- <script type="text/javascript" src="static/data.json"></script> -->
+        <script
+            rel="javascript"
+            type="text/javascript"
+            src="static/js/account/sign_in_up.js"
+        ></script>
 
-</body>
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
 
+        {{ if .Show}}
+        <script type="text/javascript">
+            container.classList.add("right-panel-active");
+        </script>
+
+        {{ end }}
+    </body>
 </html>

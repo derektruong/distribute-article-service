@@ -31,7 +31,7 @@ func SignUpHandler(c *fiber.Ctx) error {
 		return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Review your input", "data": err})
 	}
 
-	if r := db.First(&acc, "email = ?", acc.Email).Row(); r != nil {
+	if r := db.First(&acc, "Email = ?", acc.Email).Row(); r != nil {
 		return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Email already exists", "data": nil})
 	}
 

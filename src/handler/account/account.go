@@ -55,7 +55,7 @@ func GetAccount(c *fiber.Ctx) error {
 // CreateAccount new user
 func CreateAccount(c *fiber.Ctx) error {
 	type NewAccount struct {
-		Name string `json:"username"`
+		Name string `json:"userame"`
 		Email    string `json:"email"`
 	}
 

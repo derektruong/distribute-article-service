@@ -6,7 +6,7 @@ import (
 
 type RoleAccount struct {
 	ID       uint   `gorm:"primarykey" json:"id"`
-	RoleName string `gorm:"not null" json:"rolename"`
+	RoleName string `gorm:"not null" json:"role_name"`
 }
 
 func (RoleAccount) TableName() string {
